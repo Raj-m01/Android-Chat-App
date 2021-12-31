@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+
+    <ProgressBar
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/progress_bar"
+        android:indeterminate="true"
+        android:layout_centerInParent="true"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/edittext_container"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:padding="30dp"
+        android:src="@drawable/icon_for_splash" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/edittext_container"
+        android:layout_margin="20dp"
+        >
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mail"
+        android:hint="email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:hint="username"
+        android:layout_below="@+id/mail"
+        android:padding="10dp"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password"
+        android:hint="password"
+        android:inputType="textPassword"
+        android:layout_below="@+id/username"
+        android:padding="10dp"
+
+        />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/hide_pass_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edittext_container"
+        android:layout_alignRight="@+id/edittext_container"
+        android:padding="10dp"
+        android:layout_margin="3dp"
+        android:src="@drawable/ic_baseline_remove_red_eye_24"
+        android:layout_above="@+id/edittext_container"
+        />
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/edittext_container"
+    android:layout_marginTop="30dp"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/btn_container"
+    >
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signup_btn"
+        android:text="Sign-Up"
+        android:layout_margin="10dp"
+
+        />
+
+    <Button
+        android:id="@+id/google_signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/google"
+        android:text="Google"
+
+        />
+</LinearLayout>
+
+<!--    <Button-->
+<!--        android:id="@+id/move_to_signin"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/btn_container"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:background="?android:attr/selectableItemBackground"-->
+<!--        android:text="Already have account? Sign-in." />-->
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/move_to_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_container"
+            android:layout_centerHorizontal="true"
+            android:text="Already have account? Sign-in."
+            android:textSize="15sp"
+            app:backgroundTint="@android:color/transparent"
+            app:cornerRadius="8dp"
+            app:strokeColor="?attr/colorSecondary"
+            app:strokeWidth="2dp" />
+
+</RelativeLayout>

@@ -1,0 +1,49 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ChatApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+<!--        <item name="colorPrimary">@color/purple_200</item>-->
+<!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
+<!--        <item name="colorOnPrimary">@color/black</item>-->
+
+<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
+<!--        <item name="colorSecondary">@color/teal_200</item>-->
+<!--        <item name="colorSecondaryVariant">@color/teal_200</item>-->
+<!--        <item name="colorOnSecondary">@color/black</item>-->
+
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+
+
+        <item name="colorPrimary">#0F4C75</item>
+        <item name="colorPrimaryVariant">#002549</item>
+        <item name="colorOnPrimary">#F5F5F5</item>
+        <!--        <item name="colorPrimaryLight">#ff8781</item>-->
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#f05454</item>
+        <item name="colorSecondaryVariant">#ff8781</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:colorBackground">#1B262C</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="colorForFrag">@color/colorSecondaryLight_Light</item>
+
+        <!--        <item name="android:textColorPrimary">@color/white</item>-->
+<!--        <item name="android:textColorSecondary">@color/white</item>-->
+
+
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+
+
+        <!-- Customize your theme here. -->
+    </style>
+
+
+
+</resources>

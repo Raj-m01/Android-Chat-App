@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ContactListsActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/contactlist_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:queryHint="Search other users" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <RelativeLayout
+        android:id="@+id/new_user_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contactlist_toolbar"
+        android:layout_margin="10dp">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/parent_image_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="25dp">
+
+            <ImageView
+                android:id="@+id/profile_pic_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/parent_image_view"
+            android:text="user_one"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/usermail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_name"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@+id/parent_image_view"
+            android:maxWidth="200dp"
+            android:maxLines="2"
+            android:padding="5dp"
+            android:text="sgfdfvdsfgsffdsgsdgdsfguser@mail.com"
+            android:textSize="16sp" />
+
+
+        <ImageView
+            android:id="@+id/add_contact_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="add"
+            android:padding="10dp"
+            android:src="@drawable/ic_baseline_person_add_alt_1_24" />
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

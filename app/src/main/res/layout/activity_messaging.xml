@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MessagingActivity"
+    android:id="@+id/parent_viewgroup"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/msg_toolbar"
+        android:background="?attr/colorPrimary"
+        >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="-14dp"
+            android:padding="3dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+            android:contentDescription="UserProfilePicture" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/back_btn"
+            android:id="@+id/parent_image_view"
+            app:cardCornerRadius="22dp"
+            >
+            <ImageView
+                android:layout_height="44dp"
+                android:layout_width="wrap_content"
+                android:id="@+id/profile_pic_imageview"
+                android:src="@drawable/user"
+                android:scaleType="centerCrop"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/receiver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:padding="5dp"
+            android:layout_toRightOf="@+id/parent_image_view"
+            android:text="username"
+            android:textSize="18dp" />
+
+
+    </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/msg_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/typing_space_parent"
+        android:layout_below="@+id/msg_toolbar"
+        android:layout_marginTop="5dp" />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:outlineProvider="none"
+        android:layout_margin="5dp"
+        android:layout_toLeftOf="@+id/send_btn_parent"
+        android:layout_alignParentBottom="true"
+        app:cardCornerRadius="22dp"
+        android:id="@+id/typing_space_parent"
+        >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="100dp"
+            android:id="@+id/typing_space"
+            android:background="@android:color/transparent"
+            android:hint="Enter message"
+            android:paddingVertical="10dp"
+            android:paddingStart="20dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <!--            android:backgroundTint="@color/black"-->
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/send_btn_parent"
+        >
+        <ImageView
+            android:layout_height="44dp"
+            android:layout_width="44dp"
+            android:id="@+id/send_msg_btn"
+            android:padding="10dp"
+            android:background="?attr/colorSecondary"
+            android:src="@drawable/ic_baseline_send_24"
+            android:scaleType="centerCrop"/>
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>

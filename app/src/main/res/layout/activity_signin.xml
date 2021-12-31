@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SigninActivity">
+
+
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/progress_bar"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:layout_margin="10dp"
+
+            />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/signin_edittext_container"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:padding="30dp"
+        android:src="@drawable/icon_for_splash" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/signin_edittext_container"
+        android:layout_margin="20dp"
+        >
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:id="@+id/signin_mail"
+            android:hint="email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+
+
+            />
+
+
+        <EditText
+            android:id="@+id/signin_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/signin_mail"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+
+            />
+
+        <ImageView
+            android:id="@+id/hide_pass_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signin_mail"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_baseline_remove_red_eye_24" />
+
+
+    </RelativeLayout>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/signin_edittext_container"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="30dp"
+
+    >
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signin_btn"
+        android:text="Sign-in"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="10dp"
+        />
+
+<!--    <Button-->
+<!--        android:id="@+id/google_signin_signinact"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:drawableLeft="@drawable/google"-->
+<!--        android:layout_toRightOf="@+id/signin_btn"-->
+<!--        android:layout_marginHorizontal="10dp"-->
+
+<!--        android:text="Google"-->
+
+<!--        />-->
+
+</LinearLayout>
+</RelativeLayout>

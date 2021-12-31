@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SettingActivity"
+    android:id="@+id/setting_container"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_toolbar"
+        android:background="?attr/colorPrimary"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/back_btn"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+            android:layout_gravity="left"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Setting"
+            android:textSize="24sp"
+            android:layout_gravity="center_horizontal"
+            />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:id="@+id/profile"
+        android:textSize="24sp"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+
+        />
+
+<!--<androidx.appcompat.widget.SwitchCompat-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:id="@+id/toggle_darkmode"-->
+<!--    android:textSize="24sp"-->
+<!--    android:padding="10dp"-->
+<!--    android:layout_margin="10dp"-->
+<!--    />-->
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:id="@+id/logout"
+        android:textSize="24sp"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+
+        />
+
+</LinearLayout>

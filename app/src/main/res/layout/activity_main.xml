@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:id="@+id/cont"
+    >
+
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/tabLayout"/>-->
+
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:id="@+id/view_pager"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@+id/tabLayout">-->
+
+
+<!--    </androidx.viewpager2.widget.ViewPager2>-->
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_toolbar"
+            android:background="?attr/colorPrimary"
+            >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chat App"
+                android:textSize="24sp"
+                android:layout_gravity="center_horizontal"
+                />
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+
+
+
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="?attr/colorPrimaryVariant"-->
+<!--        android:layout_below="@+id/my_toolbar"-->
+<!--        android:id="@+id/view"-->
+<!--        />-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/chats_recyclerview"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_margin="10dp"        />
+
+
+    <TextView
+        android:id="@+id/tutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/move_to_contactlist_fab"
+        android:padding="10dp"
+        android:text="Your contact list seems to be empty. Click there to add contact --->"
+        android:textSize="24sp" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/move_to_contactlist_fab"
+        android:src="@drawable/ic_baseline_person_add_alt_1_24"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        />
+
+
+</RelativeLayout>
