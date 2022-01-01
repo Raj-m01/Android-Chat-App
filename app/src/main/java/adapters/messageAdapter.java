@@ -80,7 +80,7 @@ public class messageAdapter extends RecyclerView.Adapter {
             final Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(time);
             final String timeString =
-                    new SimpleDateFormat("hh:mm aa").format(cal.getTime());
+                    new SimpleDateFormat("HH:mm").format(cal.getTime());
 
             ((IncomingViewholder) holder).incomingMsgTime.setText(timeString);
         }

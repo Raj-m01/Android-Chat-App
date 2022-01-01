@@ -68,7 +68,7 @@ public class chatPageAdapter extends RecyclerView.Adapter<chatPageAdapter.ViewHo
         int diff = Integer.parseInt(timeString2.substring(0, 2)) - Integer.parseInt(timeString1.substring(0, 2));
 
         if (diff < 1) {
-            holder.recent_time.setText(timeString1.trim().substring(9));
+            holder.recent_time.setText(timeString1.trim().substring(8));
         } else if (diff >= 1) {
             holder.recent_time.setText(timeString1.trim().substring(0, 8));
         }

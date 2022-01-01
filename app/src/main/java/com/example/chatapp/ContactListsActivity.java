@@ -56,6 +56,7 @@ public class ContactListsActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
 
                 activityContactListsBinding.searchView.clearFocus();
+                searchedUser.clear();
 
               firebaseDatabase.getReference("Users").addValueEventListener(new ValueEventListener() {
                   @Override
@@ -71,6 +72,7 @@ public class ContactListsActivity extends AppCompatActivity {
                           if(!flag && e.child("userMail").getValue().equals(query.trim()) ) {
 
 
+                              Log.d("testcontact"," "+query+"  name= "+e.child("userName").getValue().toString());
                               UserModel userModel = new UserModel();
                               userModel.setUserName(e.child("userName").getValue().toString());
 
@@ -88,6 +90,28 @@ public class ContactListsActivity extends AppCompatActivity {
                                       .into(activityContactListsBinding.profilePicImageview);
 
                               activityContactListsBinding.newUserDisplay.setVisibility(View.VISIBLE);
+
+                              activityContactListsBinding.addContactBtn.setOnClickListener(new View.OnClickListener() {
+                                  @Override
+                                  public void onClick(View v) {
+
+                                      Toast.makeText(ContactListsActivity.this, "Contact added", Toast.LENGTH_SHORT).show();
+
+                                      String userId = searchedUser.get(0).getUserId();
+
+                                      firebaseDatabase.getReference("Users").child(firebaseAuth.getCurrentUser().getUid())
+                                              .child("Contacts").child(userId).setValue("Chats");
+                                      searchedUser.clear();
+
+                                      firebaseDatabase.getReference("Users").child(firebaseAuth.getUid()).child("Contacts").child(userId)
+                                              .child("interactionTime").setValue(new Date().getTime());
+                                      firebaseDatabase.getReference("Users").child(firebaseAuth.getUid()).child("Contacts").child(userId)
+                                              .child("recentMessage").setValue("");
+
+
+
+                                  }
+                              });
 
                           }
                       }
@@ -111,27 +135,7 @@ public class ContactListsActivity extends AppCompatActivity {
 
 
 
-        activityContactListsBinding.addContactBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Toast.makeText(ContactListsActivity.this, "Contact added", Toast.LENGTH_SHORT).show();
-
-                String userId = searchedUser.get(0).getUserId();
-
-                firebaseDatabase.getReference("Users").child(firebaseAuth.getCurrentUser().getUid())
-                        .child("Contacts").child(userId).setValue("Chats");
-                searchedUser.clear();
-
-                firebaseDatabase.getReference("Users").child(firebaseAuth.getUid()).child("Contacts").child(userId)
-                        .child("interactionTime").setValue(new Date().getTime());
-                firebaseDatabase.getReference("Users").child(firebaseAuth.getUid()).child("Contacts").child(userId)
-                        .child("recentMessage").setValue("");
-
-
-
-            }
-        });
 
     }
 
