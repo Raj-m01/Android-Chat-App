@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.chatapp.databinding.ActivitySettingBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -17,6 +18,7 @@ public class SettingActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FirebaseAuth myAuth;
     FragmentTransaction fragmentTransaction;
+    FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class SettingActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         myAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
 
         activitySettingBinding.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +70,8 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                firebaseDatabase.getReference("Users").child(myAuth.getUid())
+                        .child("token").setValue("");
                 myAuth.signOut();
                 Intent intent = new Intent(SettingActivity.this, SignupActivity.class);
                 startActivity(intent);

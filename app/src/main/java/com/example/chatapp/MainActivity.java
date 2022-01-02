@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -36,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth myAuth;
     ActivityMainBinding activityMainBinding;
     FirebaseDatabase firebaseDatabase;
-    SharedPreferences sharedPreferences;
     final ExecutorService executorService = Executors.newSingleThreadExecutor();
     chatPageAdapter chatPageAdapter;
     ArrayList<UserModel> userData = new ArrayList<>();
     Toolbar myToolbar;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         firebaseDatabase = FirebaseDatabase.getInstance();
         myAuth = FirebaseAuth.getInstance();
+
+        userId = myAuth.getCurrentUser().getUid();
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -56,10 +60,7 @@ public class MainActivity extends AppCompatActivity {
         myToolbar = activityMainBinding.myToolbar;
         myToolbar.inflateMenu(R.menu.main_menu);
 
-        sharedPreferences = getSharedPreferences("SavedToken",MODE_PRIVATE);
-        String tokenInMain =  sharedPreferences.getString("ntoken","mynull");
 
-        firebaseDatabase.getReference("Users").child(myAuth.getUid()).child("Token for notifications").setValue(tokenInMain);
 
         setContentView(activityMainBinding.getRoot());
 
@@ -106,26 +107,28 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+
+
                         userData.clear();
                         ArrayList<String> contactIds = new ArrayList<>();
                         ArrayList<Long> recentMsgTimes = new ArrayList<>();
                         ArrayList<String> recentMsg = new ArrayList<>();
 
 
+                        if(snapshot.child(userId).hasChild("Contacts"))
+                            for (DataSnapshot e : snapshot.child(myAuth.getUid()).child("Contacts").getChildren()){
+                                contactIds.add(e.getKey());
 
-                        for (DataSnapshot e : snapshot.child(myAuth.getUid()).child("Contacts").getChildren()){
-                            contactIds.add(e.getKey());
 
+                                if(e.hasChild("interactionTime")) {
+                                    recentMsgTimes.add((long)e.child("interactionTime").getValue());
+                                }
 
-                            if(e.hasChild("interactionTime")) {
-                                recentMsgTimes.add((long)e.child("interactionTime").getValue());
+                                if(e.hasChild("recentMessage")){
+                                    recentMsg.add(e.child("recentMessage").getValue().toString());
+                                }
+
                             }
-
-                            if(e.hasChild("recentMessage")){
-                                recentMsg.add(e.child("recentMessage").getValue().toString());
-                            }
-
-                        }
 
                         if(contactIds.isEmpty()){
                             activityMainBinding.tutorial.setVisibility(View.VISIBLE);
@@ -154,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                             String uName = snapshot.child(e).child("userName").getValue().toString();
                             String uMail = snapshot.child(e).child("userMail").getValue().toString();
                             String uPic = snapshot.child(e).child("profilePic").getValue().toString();
-                            String token = snapshot.child(e).child("Token for notifications").getValue().toString();
+                            String token = snapshot.child(e).child("token").getValue().toString();
 
                             UserModel model = new UserModel(uName, uMail, uPic);
                             model.setUserId(e);
@@ -202,6 +205,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
     }
 
     public boolean isOnline() {

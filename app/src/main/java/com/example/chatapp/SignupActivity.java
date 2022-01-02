@@ -1,6 +1,7 @@
 package com.example.chatapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -22,15 +23,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 import models.UserModel;
@@ -41,6 +41,8 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth myAuth;
     FirebaseDatabase firebaseDatabase;
     ActivityResultLauncher<Intent> activityResultLauncher;
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,23 +134,20 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onActivityResult(ActivityResult result) {
 
-                // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-                activitySignupBinding.progressBar.setVisibility(View.GONE);
+
 
                     Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
                     try {
                         // Google Sign In was successful, authenticate with Firebase
                         GoogleSignInAccount account = task.getResult(ApiException.class);
-                        Log.d("TAG", "firebaseAuthWithGoogle:" + account.getId());
                         firebaseAuthWithGoogle(account.getIdToken());
 
                     } catch (ApiException e) {
                         // Google Sign In failed, update UI appropriately
                         Toast.makeText(SignupActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        Log.w("TAG", "Google sign in failed", e);
                     }
 
-
+                activitySignupBinding.progressBar.setVisibility(View.GONE);
             }
         });
 
@@ -162,23 +161,54 @@ public class SignupActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        activitySignupBinding.progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
+
+                            String id =  task.getResult().getUser().getUid();
+
+
+                            // To not override default user values in DB when signing again with google
+                            firebaseDatabase.getReference().child("Users").child(id).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                @Override
+                                public void onSuccess(DataSnapshot dataSnapshot) {
+
+                                    if(!dataSnapshot.hasChild("userName")){
+
+                                        String defaultUserName = task.getResult().getUser().getEmail();
+                                        String about = "Online";
+
+                                        sharedPreferences = getSharedPreferences("SavedToken",MODE_PRIVATE);
+                                        String tokenInMain =  sharedPreferences.getString("ntoken","mynull");
+
+                                        UserModel userModel = new UserModel(defaultUserName.substring(0, defaultUserName.indexOf('@'))
+                                                , task.getResult().getUser().getEmail()
+                                                , "null"
+                                                , task.getResult().getUser().getPhotoUrl().toString()
+                                                , about);
+
+                                        userModel.setToken(tokenInMain);
+
+                                        firebaseDatabase.getReference().child("Users").child(id).setValue(userModel);
+
+
+                                    }else{
+
+                                        sharedPreferences = getSharedPreferences("SavedToken",MODE_PRIVATE);
+                                        String tokenInMain =  sharedPreferences.getString("ntoken","mynull");
+                                        firebaseDatabase.getReference("Users").child(id).child("token").setValue(tokenInMain);
+
+                                    }
+                                }
+                            });
+
+                            activitySignupBinding.progressBar.setVisibility(View.GONE);
                             Intent intent = new Intent(SignupActivity.this,MainActivity.class);
                             startActivity(intent);
-                            String id =  task.getResult().getUser().getUid();
-                            String defaultUserName = task.getResult().getUser().getEmail();
-                            String about = "Online";
-                            firebaseDatabase.getReference().child("Users").child(id).setValue(new UserModel(defaultUserName.substring(0,defaultUserName.indexOf('@'))
-                                                                                                            ,task.getResult().getUser().getEmail()
-                                                                                                            ,"null"
-                                                                                                            ,task.getResult().getUser().getPhotoUrl().toString()
-                                                                                                            ,about));
 
+//                            }
 
                         } else {
                             Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage()+"", Toast.LENGTH_SHORT).show();
-                            Log.d("TAG", "signInWithCredential:failure", task.getException());
+                            Log.d("TAG2", "signInWithCredential:failure", task.getException());
                             activitySignupBinding.progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -199,11 +229,30 @@ public class SignupActivity extends AppCompatActivity {
                         activitySignupBinding.progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
 
-                           String id =  task.getResult().getUser().getUid();
+                           String id2 =  task.getResult().getUser().getUid();
+
+
+
+                                        UserModel userModel = new UserModel(userName,email,password,"R.drawable.user",about);
+
+                                        sharedPreferences = getSharedPreferences("SavedToken",MODE_PRIVATE);
+                                        String tokenInMain =  sharedPreferences.getString("ntoken","mynull");
+                                        userModel.setToken(tokenInMain);
+
+                                        firebaseDatabase.getReference().child("Users")
+                                                .child(id2)
+                                                .setValue(userModel);
+
 
                             Intent intent = new Intent(SignupActivity.this,MainActivity.class);
                             startActivity(intent);
-                            firebaseDatabase.getReference().child("Users").child(id).setValue(new UserModel(userName,email,password,"R.drawable.user",about));
+
+
+
+
+
+
+
                         } else {
                             Toast.makeText(SignupActivity.this, "SignUp failed "+task.getException().getLocalizedMessage(),
                                     Toast.LENGTH_SHORT).show();

@@ -46,15 +46,14 @@
 
         />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/username"
-        android:hint="username"
-        android:layout_below="@+id/mail"
-        android:padding="10dp"
-
-        />
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mail"
+            android:hint="username"
+            android:padding="10dp"
+            android:singleLine="true" />
 
     <EditText
         android:layout_width="match_parent"

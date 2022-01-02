@@ -1,6 +1,7 @@
 package com.example.chatapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -18,13 +19,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SigninActivity extends AppCompatActivity {
 
 
     FirebaseAuth myAuth;
     ActivitySigninBinding activitySigninBinding;
-
+    SharedPreferences sharedPreferences;
+    FirebaseDatabase firebaseDatabase;
 
 
     @Override
@@ -39,8 +42,11 @@ public class SigninActivity extends AppCompatActivity {
         }
         setContentView(activitySigninBinding.getRoot());
 
+//        sharedPreferences = getSharedPreferences("SavedToken",MODE_PRIVATE);
+
 
         myAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
         activitySigninBinding.progressBar.setVisibility(View.GONE);
 
@@ -75,6 +81,16 @@ public class SigninActivity extends AppCompatActivity {
 
                                     activitySigninBinding.progressBar.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
+
+                                        String id =  task.getResult().getUser().getUid();
+
+
+                                            sharedPreferences = getSharedPreferences("SavedToken",MODE_PRIVATE);
+                                            String tokenInMain =  sharedPreferences.getString("ntoken","mynull");
+                                            firebaseDatabase.getReference("Users").child(id).child("token").setValue(tokenInMain);
+
+
+
 
                                         Intent intent = new Intent(SigninActivity.this, MainActivity.class);
                                         startActivity(intent);

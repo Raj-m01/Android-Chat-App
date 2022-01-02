@@ -131,8 +131,9 @@ public class MessagingActivity extends AppCompatActivity {
 
 
 
-        FirebaseMessaging.getInstance().subscribeToTopic("all");
+//        FirebaseMessaging.getInstance().subscribeToTopic("all");
 
+        //Messaging Mechanism
         activityMessagingBinding.sendMsgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

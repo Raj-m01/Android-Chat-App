@@ -52,8 +52,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
-            android:padding="5dp"
+            android:maxLines="1"
             android:layout_toRightOf="@+id/parent_image_view"
+            android:padding="5dp"
             android:text="username"
             android:textSize="18dp" />
 
