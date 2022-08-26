@@ -58,7 +58,7 @@ public class ContactListsActivity extends AppCompatActivity {
                 activityContactListsBinding.searchView.clearFocus();
                 searchedUser.clear();
 
-              firebaseDatabase.getReference("Users").addValueEventListener(new ValueEventListener() {
+                firebaseDatabase.getReference("Users").addValueEventListener(new ValueEventListener() {
                   @Override
                   public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -107,9 +107,6 @@ public class ContactListsActivity extends AppCompatActivity {
                                               .child("interactionTime").setValue(new Date().getTime());
                                       firebaseDatabase.getReference("Users").child(firebaseAuth.getUid()).child("Contacts").child(userId)
                                               .child("recentMessage").setValue("");
-
-
-
                                   }
                               });
 
@@ -132,12 +129,5 @@ public class ContactListsActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
-
-
-
     }
-
-
 }
