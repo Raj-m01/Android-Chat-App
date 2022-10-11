@@ -104,16 +104,9 @@ public class MessagingActivity extends AppCompatActivity {
 
 
                     String msg = e.child("msgText").getValue().toString();
-                    String decrypted =msg;
-
-                    try {
-                        decrypted = AESUtils.decrypt(msg);
-                    } catch (Exception er) {
-                        er.printStackTrace();
-                    }
 
                     msgData.add(new MessageModel(e.child("uId").getValue().toString()
-                            ,decrypted
+                            ,msg
                             ,(Long) Long.valueOf(e.child("msgTime").getValue().toString())));
 
                 }
@@ -139,20 +132,12 @@ public class MessagingActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String msg = activityMessagingBinding.typingSpace.getText().toString().trim();
-
-                String encryptedMsg = msg;
-                try {
-                    encryptedMsg = AESUtils.encrypt(msg);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    encryptedMsg = msg;
-                }
-
+              
 
                 long date = new Date().getTime();
 
                 activityMessagingBinding.typingSpace.setText("");
-                final MessageModel messageModel = new MessageModel(senderId, encryptedMsg, date);
+                final MessageModel messageModel = new MessageModel(senderId, msg, date);
 
                 if(!msg.isEmpty()) {
                     firebaseDatabase.getReference("Users").child(senderId).child("Contacts")
