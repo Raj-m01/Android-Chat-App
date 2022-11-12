@@ -39,6 +39,14 @@ Android chat application developed with Java and Firebase. A hassle-free way to 
 ## Firebase Database Schema : 
 ![image](https://user-images.githubusercontent.com/79650580/195172072-bcbe77b4-84c2-4a6c-817d-836bb0572db6.png)
 
+## Firebase Setup :
+* Setup Authentication - Email and Google account
+* Setup Realtime Database
+* Setup firebase Storage
+* Firebase messaging service
+* download the file google-services.json from firebase console and add to project file
+* Note: Download the google-services.json file after the Firebase services are set up to automatically include the services in the json file.
+* Note: When updating the google-services.json file then make sure to invalidate the caches as well as doing a clean + rebuild.
 
 ### Full demo : 
 <div align="center">
